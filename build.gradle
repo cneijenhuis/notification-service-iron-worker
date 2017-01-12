@@ -1,0 +1,26 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7.1'
+    compile group: 'io.iron.ironworker', name: 'ironworker', version: '1.0.12'
+    compile 'com.notnoop.apns:apns:1.0.0.Beta6'
+}
+
+task runScript(type: JavaExec) {
+    description 'Run Groovy script'
+
+    main = 'de.commercetools.NotificationUtil'
+    classpath = sourceSets.main.runtimeClasspath
+
+    if (project.hasProperty('custom')) {
+        // Pass command-line argument to script.
+        args project.getProperty('custom')
+    }
+}
+
+defaultTasks 'runScript'
