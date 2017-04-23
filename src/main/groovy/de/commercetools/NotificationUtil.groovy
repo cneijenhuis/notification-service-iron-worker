@@ -11,16 +11,12 @@ import java.nio.charset.StandardCharsets
 import static groovyx.net.http.ContentType.JSON
 
 WorkerHelper helper = WorkerHelper.fromArgs(args)
-
 InputStream jsonPayload = new FileInputStream(helper.payloadPath)
-if (jsonPayload == null) {
-    println "Could not load file at: ${helper.payloadPath}"
-}
 
 JsonSlurper slurper = new JsonSlurper()
 Map map = slurper.parse(jsonPayload)
 
-new NotificationService().sendReservationNotification(map)
+sendReservationNotification(map)
 
 class NotificationService {
 
