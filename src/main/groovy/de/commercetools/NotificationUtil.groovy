@@ -10,13 +10,15 @@ import java.nio.charset.StandardCharsets
 
 import static groovyx.net.http.ContentType.JSON
 
-WorkerHelper helper = WorkerHelper.fromArgs(args)
-InputStream jsonPayload = new FileInputStream(helper.payloadPath)
+public static void main(String[] args) {
+    WorkerHelper helper = WorkerHelper.fromArgs(args)
+    InputStream jsonPayload = new FileInputStream(helper.payloadPath)
 
-JsonSlurper slurper = new JsonSlurper()
-Map map = slurper.parse(jsonPayload)
+    JsonSlurper slurper = new JsonSlurper()
+    Map map = slurper.parse(jsonPayload)
 
-sendReservationNotification(map)
+    sendReservationNotification(map)
+}
 
 class NotificationService {
 
